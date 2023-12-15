@@ -1,0 +1,186 @@
+<html lang="en" class=""><script>
+  window.elrondWallet = {
+    extensionId: "dngmlblcodfobpdpecaadgfbcggfjfnm",
+  };
+
+</script><head>
+
+    <meta charset="UTF-8">
+    <title>CodePen Demo</title>
+
+    <meta name="robots" content="noindex">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+    <link rel="mask-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111">
+    <link rel="canonical" href="https://codepen.io/AllThingsSmitty/pen/JJavZN?editors=1010">
+
+
+
+
+
+
+
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+    <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeConsoleRunner-6d8bf8b4b479137260842506acbb12717dace0823c023e08b96360e60b0840d9.js"></script>
+    <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-44fe83e49b63affec96918c9af88c0d80b209a862cf87ac46bc933074b8c557d.js"></script>
+    <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRuntimeErrors-4f205f2c14e769b448bcf477de2938c681660d5038bc464e3700256713ebe261.js"></script>
+    <style id="INLINE_PEN_STYLESHEET_ID">
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* general styling */
+        :root {
+            --smaller: .75;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            align-items: center;
+            background-color: #ffd54f;
+            display: flex;
+            font-family: -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Roboto,
+            Oxygen-Sans,
+            Ubuntu,
+            Cantarell,
+            "Helvetica Neue",
+            sans-serif;
+        }
+
+        .container {
+            color: #333;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-weight: normal;
+            letter-spacing: .125rem;
+            text-transform: uppercase;
+        }
+
+        li {
+            display: inline-block;
+            font-size: 1.5em;
+            list-style-type: none;
+            padding: 1em;
+            text-transform: uppercase;
+        }
+
+        li span {
+            display: block;
+            font-size: 4.5rem;
+        }
+
+        .emoji {
+            display: none;
+            padding: 1rem;
+        }
+
+        .emoji span {
+            font-size: 4rem;
+            padding: 0 .5rem;
+        }
+
+        @media all and (max-width: 768px) {
+            h1 {
+                font-size: calc(1.5rem * var(--smaller));
+            }
+
+            li {
+                font-size: calc(1.125rem * var(--smaller));
+            }
+
+            li span {
+                font-size: calc(3.375rem * var(--smaller));
+            }
+        }</style></head>
+
+<body>
+<div class="container">
+    <h1 id="headline">Countdown to my next project</h1>
+    <div id="countdown">
+        <ul>
+            <li><span id="days">47</span>days</li>
+            <li><span id="hours">14</span>Hours</li>
+            <li><span id="minutes">17</span>Minutes</li>
+            <li><span id="seconds">11</span>Seconds</li>
+        </ul>
+    </div>
+    <div id="content" class="emoji">
+        <span>🥳</span>
+        <span>🎉</span>
+        <span>🎂</span>
+    </div>
+</div>
+
+<script>
+  (function () {
+    const second = 1000,
+      minute = second * 60,
+      hour = minute * 60,
+      day = hour * 24;
+
+    //I'm adding this section so I don't have to keep updating this pen every year :-)
+    //remove this if you don't need it
+    let today = new Date(),
+      dd = String(today.getDate()).padStart(2, "0"),
+      mm = String(today.getMonth() + 1).padStart(2, "0"),
+      yyyy = today.getFullYear(),
+      nextYear = yyyy + 1,
+      dayMonth = "02/01/",
+      birthday = dayMonth + yyyy;
+
+    today = mm + "/" + dd + "/" + yyyy;
+    if (today > birthday) {
+      birthday = dayMonth + nextYear;
+    }
+    //end
+
+    const countDown = new Date(birthday).getTime(),
+      x = setInterval(function() {
+
+        const now = new Date().getTime(),
+          distance = countDown - now;
+
+        document.getElementById("days").innerText = Math.floor(distance / (day)),
+          document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
+          document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
+          document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+
+        //do something later when date is reached
+        if (distance < 0) {
+          document.getElementById("headline").innerText = "Time for a new project!";
+          document.getElementById("countdown").style.display = "none";
+          document.getElementById("content").style.display = "block";
+          clearInterval(x);
+        }
+        //seconds
+      }, 0)
+  }());
+</script>
+
+
+</body></html>
